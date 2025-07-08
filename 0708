@@ -19,3 +19,47 @@ LICENSE       audio                        demos     kernel_meta            setu
 MANIFEST.in   bert-base-chinese-vocab.txt  docker    paddlespeech           setup.py     utils
 README.md     build                        docs      paddlespeech.egg-info  tests
 README_cn.md  dataset                      examples  runtime                third_party
+
+进到相应的目录后，先启动服务，改.yaml的配置文件，让服务运行在npu上
+服务启动之后，可以用命令行测试
+
+根据python api调用的形式，改为通过url访问，通过WebSocket测试流式ASR服务
+
+PaddleSpeech流式ASR WebSocket接口的正确交互流程如下：
+1. 连接建立
+客户端连接：ws://{server}:{port}/paddlespeech/asr/streaming
+2. 发送“开始”信号
+客户端需首先发送如下JSON：
+{
+  "name": "test.wav",
+  "signal": "start",
+  "nbest": 1
+}
+服务端返回：
+{
+  "status": "ok",
+  "signal": "server_ready"
+}
+3. 发送音频数据
+客户端只发送一次完整音频。
+4. 发送“结束”信号
+客户端发送如下JSON：
+{
+  "name": "test.wav",
+  "signal": "end",
+  "nbest": 1
+}
+服务端返回最终识别结果。
+要点说明：
+必须先发“start”信号，收到server_ready后再发音频数据。
+音频需为PCM16格式发送。
+最后发“end”信号，等待最终识别结果。
+
+
+写一个前端来测试流式：
+主要功能
+录音：通过浏览器获取麦克风音频流。
+音频处理：将音频流转为16k PCM格式。
+WebSocket通信：与后端ASR服务建立WebSocket连接，实时发送音频数据。
+实时显示识别结果：服务端返回识别结果后，网页实时显示。
+
