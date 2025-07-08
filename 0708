@@ -1,1 +1,17 @@
 0708工作记录
+进入容器：
+(base) root@bms-58150179-001:~/.cache/asr_deal# docker ps
+CONTAINER ID   IMAGE                                                                                                 COMMAND       CREATED      STATUS        PORTS                                         NAMES
+94c54eb9f6f9   paddlespeech-npu:v1                                                                                   "/bin/bash"   4 days ago   Up 14 hours                                                 paddlespeech_test2
+b4b6dc4fd9de   paddlespeech-npu:v1                                                                                   "/bin/bash"   4 days ago   Up 4 days                                                   paddlespeech-test
+3f947e2501c0   ccr-2vdh3abv-pub.cnc.bj.baidubce.com/device/paddle-npu:cann800-ubuntu20-npu-910b-base-aarch64-gcc84   "/bin/bash"   4 days ago   Up 4 days                                                   paddlespeech
+3fcb860ddee5   swr.cn-south-1.myhuaweicloud.com/ascendhub/mindie:2.0.T3.1-800I-A2-py311-openeuler24.03-lts           "bash"        6 days ago   Up 6 days     0.0.0.0:9997->9997/tcp, [::]:9997->9997/tcp   xinf_9997
+(base) root@bms-58150179-001:~/.cache/asr_deal# docker exec -it 94c /bin/bash
+root@bms-58150179-001:/work# ls
+PaddleSpeech  fusion_result.json  paddlespeech_test
+root@bms-58150179-001:/work# cd PaddleSpeech/
+root@bms-58150179-001:/work/PaddleSpeech# ls
+LICENSE       audio                        demos     kernel_meta            setup.cfg    tools
+MANIFEST.in   bert-base-chinese-vocab.txt  docker    paddlespeech           setup.py     utils
+README.md     build                        docs      paddlespeech.egg-info  tests
+README_cn.md  dataset                      examples  runtime                third_party
