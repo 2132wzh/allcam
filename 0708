@@ -1,4 +1,8 @@
 0708工作记录
+-------------------------------------
+https://github.com/PaddlePaddle/PaddleSpeech/blob/develop/demos/streaming_asr_server/README_cn.md
+实现流式asr
+-------------------------------------
 进入容器：
 (base) root@bms-58150179-001:~/.cache/asr_deal# docker ps
 CONTAINER ID   IMAGE                                                                                                 COMMAND       CREATED      STATUS        PORTS                                         NAMES
